@@ -123,13 +123,13 @@ export default {
 
 .left {
     left: 0;
-    padding: 0 40px 0 8px;
+    padding: 0 16px 0 8px;
     background: linear-gradient(to right, #ffffffff, #ffffffff, #ffffffee, #ffffffaa, #ffffff00);
 }
 
 .right {
     right: 0;
-    padding: 0 8px 0 40px;
+    padding: 0 8px 0 16px;
     background: linear-gradient(to left, #ffffffff, #ffffffff, #ffffffee, #ffffffaa, #ffffff00);
 }
 
