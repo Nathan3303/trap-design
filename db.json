@@ -1,0 +1,420 @@
+{
+  "shots": [
+    {
+      "id": 1,
+      "authorId": 1,
+      "author": "Nathan Lee",
+      "title": "123",
+      "category": "chinese",
+      "tags": [],
+      "likes": 5,
+      "views": 2000,
+      "thumbnail": "/images/works/a.webp",
+      "content": [
+        "这是一些描述文字",
+        "在文字录入比赛（打字比赛）中，最公平的比赛用文本就是随机文本，这个随机汉字生成器便是为此所作。普通人的汉字录入速度一般是每分钟几十个到一百多个，我们可以生成一两千字的随机汉字文本，让比赛者录入完这些汉字，依据他们的比赛用时和正确率判断名次。生成随机汉字的原始文字一般选择常用汉字，经过随机排列之后只能一个字一个字的输入，对参赛者来说是相对公平的方案。",
+        "可选择常用字和次常用字，或者选中“用户输入”然后自行输入要随机排列的汉字。在数量中输入想要输出的字数，3000字以内。然后点击“生成”便可，生成的随机汉字每５个一组，方便浏览。多次点击则输出汉字重新随机排列。",
+        "选中随机词语后，还可选择单个词语字数：二字词、三字词、四字词、五字词，可单选也可多选。在数量中输入想要生成的词语个数，然后点击生成便可。输出的词语是从《辞海》中随机抽取的，不会重复。"
+      ]
+    },
+    {
+      "id": 2,
+      "authorId": 1,
+      "author": "Nathan Lee",
+      "title": "Finview Dashboard",
+      "category": "gouache",
+      "tags": [],
+      "likes": 33,
+      "views": 49000,
+      "thumbnail": "/images/works/b.webp",
+      "content": []
+    },
+    {
+      "id": 3,
+      "authorId": 1,
+      "author": "Nathan Lee",
+      "title": "Decriminalize Poverty Website Pages",
+      "category": "oilpainting",
+      "tags": [],
+      "likes": 18,
+      "views": 310000,
+      "thumbnail": "/images/works/c.webp",
+      "content": []
+    },
+    {
+      "id": 4,
+      "authorId": 1,
+      "author": "Nathan Lee",
+      "title": "Decriminalize Poverty Website Pages",
+      "category": "watercolor",
+      "tags": [],
+      "likes": 40,
+      "views": 310000,
+      "thumbnail": "/images/works/d.webp",
+      "content": []
+    },
+    {
+      "id": 5,
+      "authorId": 1,
+      "author": "Nathan Lee",
+      "title": "Decriminalize Poverty Website Pages",
+      "category": "woodcut",
+      "tags": [],
+      "likes": 56,
+      "views": 400,
+      "thumbnail": "/images/works/e.webp",
+      "content": []
+    },
+    {
+      "id": 6,
+      "authorId": 1,
+      "author": "Nathan Lee",
+      "title": "The National L.A. Greek Theatre Posters",
+      "category": "sketch",
+      "tags": [],
+      "likes": 67,
+      "views": 8704,
+      "thumbnail": "/images/works/f.webp",
+      "images": [
+        "/images/works/f1.webp",
+        "/images/works/f2.webp",
+        "/images/works/f3.webp",
+        "/images/works/f4.webp"
+      ],
+      "content": []
+    },
+    {
+      "id": 7,
+      "authorId": 1,
+      "author": "Nathan Lee",
+      "title": "Finview Dashboard",
+      "category": "chinese",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "/images/works/g.webp",
+      "content": []
+    },
+    {
+      "id": 8,
+      "authorId": 1,
+      "author": "Nathan Lee",
+      "title": "VisionOS App Explorations",
+      "category": "gouache",
+      "tags": [
+        "apple"
+      ],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "/images/works/h.webp",
+      "content": []
+    },
+    {
+      "id": 9,
+      "authorId": 1,
+      "author": "Nathan Lee",
+      "title": "Finview Dashboard",
+      "category": "oilpainting",
+      "tags": [
+        "a",
+        "aa"
+      ],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "/images/works/i.webp",
+      "content": []
+    },
+    {
+      "id": 10,
+      "authorId": 1,
+      "author": "Nathan Lee",
+      "title": "123",
+      "category": "watercolor",
+      "tags": [
+        "AI"
+      ],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "/images/works/j.webp",
+      "content": []
+    },
+    {
+      "id": 11,
+      "authorId": 1,
+      "author": "Nathan Lee",
+      "title": "Verification Success 3D Icon",
+      "category": "woodcut",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "/images/works/k.webp",
+      "content": []
+    },
+    {
+      "id": 12,
+      "authorId": 1,
+      "author": "Nathan Lee",
+      "title": "Verification Success 3D Icon",
+      "category": "sketch",
+      "tags": [
+        "apple",
+        "banana",
+        "cat",
+        "dog",
+        "egg",
+        "fog",
+        "glimpse",
+        "hit",
+        "illistrations"
+      ],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "/images/works/l.webp",
+      "content": []
+    },
+    {
+      "id": 13,
+      "authorId": 1,
+      "author": "Nathan Lee",
+      "title": "Verification Success 3D Icon",
+      "category": "chinese",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "/images/works/m.webp",
+      "content": []
+    },
+    {
+      "id": 14,
+      "authorId": 2,
+      "author": "aleksander",
+      "title": "Verification Success 3D Icon",
+      "category": "gouache",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "/images/works/n.webp",
+      "content": []
+    },
+    {
+      "id": 15,
+      "authorId": 2,
+      "author": "aleksander",
+      "title": "Verification Success 3D Icon",
+      "category": "oilpainting",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "/images/works/o.webp",
+      "content": []
+    },
+    {
+      "id": 16,
+      "authorId": 2,
+      "author": "aleksander",
+      "title": "Verification Success 3D Icon",
+      "category": "oilpainting",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "/images/works/p.webp",
+      "content": []
+    },
+    {
+      "id": 17,
+      "authorId": 2,
+      "author": "aleksander",
+      "title": "Verification Success 3D Icon",
+      "category": "watercolor",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "/images/works/q.webp",
+      "content": []
+    },
+    {
+      "id": 18,
+      "authorId": 2,
+      "author": "aleksander",
+      "title": "Verification Success 3D Icon",
+      "category": "watercolor",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "/images/works/r.webp",
+      "content": []
+    },
+    {
+      "id": 19,
+      "authorId": 2,
+      "author": "aleksander",
+      "title": "Verification Success 3D Icon",
+      "category": "woodcut",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "/images/works/s.webp",
+      "content": []
+    },
+    {
+      "id": 20,
+      "authorId": 2,
+      "author": "aleksander",
+      "title": "Verification Success 3D Icon",
+      "category": "woodcut",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "/images/works/t.webp",
+      "content": []
+    },
+    {
+      "id": 21,
+      "authorId": 2,
+      "author": "aleksander",
+      "title": "Verification Success 3D Icon",
+      "category": "sketch",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "/images/works/u.webp",
+      "content": []
+    },
+    {
+      "id": 22,
+      "authorId": 2,
+      "author": "aleksander",
+      "title": "Verification Success 3D Icon",
+      "category": "sketch",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "/images/works/v.webp",
+      "content": []
+    },
+    {
+      "id": 23,
+      "authorId": 2,
+      "author": "aleksander",
+      "title": "Verification Success 3D Icon",
+      "category": "sketch",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "/images/works/w.webp",
+      "content": []
+    },
+    {
+      "id": 24,
+      "authorId": 2,
+      "author": "aleksander",
+      "title": "VisionOS App Explorations",
+      "category": "chinese",
+      "tags": [
+        "apple"
+      ],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "/images/works/x.webp",
+      "content": []
+    },
+    {
+      "id": 25,
+      "authorId": 2,
+      "author": "aleksander",
+      "title": "Verification Success 3D Icon",
+      "category": "oilpainting",
+      "tags": [
+        "apple"
+      ],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "/images/works/y.webp",
+      "content": []
+    },
+    {
+      "id": 26,
+      "authorId": 3,
+      "author": "nikolai",
+      "title": "Verification Success 3D Icon",
+      "category": "chinese",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "/images/works/z.webp",
+      "content": []
+    }
+  ],
+  "authors": [
+    {
+      "id": 1,
+      "name": "nathan",
+      "fullname": "Nathan Lee",
+      "description": "WEB前端工程师、UI/XI设计师",
+      "email": "1403138891@qq.com",
+      "address": {
+        "country": "China",
+        "province": "Guangdong",
+        "city": "Zhuhai",
+        "district": "Xiangzhou",
+        "street": "Meihua"
+      },
+      "headpic": "/images/users/nathan.png",
+      "image": "/images/authors/nathan.webp"
+    },
+    {
+      "id": 2,
+      "name": "aleksander",
+      "fullname": "Aleksandar Savic",
+      "description": "Your friendly neighborhood creatives",
+      "email": "lee1928@outlook.com",
+      "address": {
+        "country": "China",
+        "province": "Guangdong",
+        "city": "Guangzhou",
+        "district": "Conghua",
+        "street": "Taiping"
+      },
+      "headpic": "/images/users/aleksander.png",
+      "image": "/images/authors/aleksander.webp"
+    },
+    {
+      "id": 3,
+      "name": "nikolai",
+      "fullname": "nikolai sten",
+      "description": "A beautiful work creator",
+      "email": "nikolai@gmail.com",
+      "address": "Guangdong Guangzhou Conghua",
+      "headpic": "",
+      "image": "/images/authors/nikolai.webp"
+    }
+  ],
+  "likes": [
+    {
+      "userId": 1,
+      "shotId": 7,
+      "id": 1
+    },
+    {
+      "userId": 1,
+      "shotId": 4,
+      "id": 2
+    },
+    {
+      "userId": 1,
+      "shotId": 21,
+      "id": 3
+    },
+    {
+      "userId": 1,
+      "shotId": 5,
+      "id": 4
+    },
+    {
+      "userId": 1,
+      "shotId": 6,
+      "id": 5
+    }
+  ],
+  "followers": []
+}
