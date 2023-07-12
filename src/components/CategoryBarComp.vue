@@ -1,11 +1,15 @@
 <template>
     <div class="category-bar-wrap" :class="`category-bar-style--${theme}`" ref="categoryBarWrap">
-        <span class="category-bar__operator left" v-show="isOverflow && valueOfLeft" @click="toLeft()">&lt;</span>
-        <span class="category-bar__operator right" v-show="isOverflow && !isEnd" @click="toRight()">&gt;</span>
-        <div class="category-bar" ref="categoryBar">
+        <span class="category-bar__operator left" v-show="isOverflow && valueOfLeft" @click="scroll('left', valueOffset)">
+            &lt;
+        </span>
+        <span class="category-bar__operator right" v-show="isOverflow && !isEnd" @click="scroll('right', valueOffset)">
+            &gt;
+        </span>
+        <div class="category-bar" ref="categoryBar" :data-isOverflow="isOverflow">
             <a
                 v-for="(item, idx) in options"
-                ref="links"
+                ref="categoryBarLinks"
                 :key="item.value"
                 :class="{ active: idx == pointer }"
                 @click.prevent="clickHandler($event, idx)">
@@ -45,24 +49,27 @@ export default {
             if (this.matchroute) this.$router.push(this.options[linkIndex].to);
             else this.$emit("clickfn", $event, linkIndex);
         },
-        toRight() {
-            const e = this.$refs.categoryBar;
-            this.valueOfLeft -= this.valueOffset;
-            const isOvered = Math.abs(this.valueOfLeft) + e.clientWidth > this.maxWidth;
-            const isClose = this.maxWidth - (Math.abs(this.valueOfLeft) + e.clientWidth) < this.valueOffset;
-            if (isOvered || isClose) {
-                this.valueOfLeft = 0 - (this.maxWidth - e.clientWidth);
-                this.isEnd = true;
+        scroll(direction, offset) {
+            const targetElement = this.$refs.categoryBar;
+            let isOvered, isClose;
+            switch (direction) {
+                case "left":
+                    this.valueOfLeft += offset;
+                    isOvered = this.valueOfLeft > 0;
+                    isClose = Math.abs(this.valueOfLeft) < offset;
+                    if (isOvered || isClose) this.valueOfLeft = 0;
+                    this.isEnd = false;
+                    break;
+                case "right":
+                    this.valueOfLeft -= offset;
+                    isOvered = Math.abs(this.valueOfLeft) + targetElement.clientWidth > this.maxWidth;
+                    isClose = this.maxWidth - (Math.abs(this.valueOfLeft) + targetElement.clientWidth) < offset;
+                    if (isOvered || isClose) {
+                        this.valueOfLeft = 0 - (this.maxWidth - targetElement.clientWidth);
+                        this.isEnd = true;
+                    }
             }
-            this.$refs.categoryBar.style.left = this.valueOfLeft + "px";
-        },
-        toLeft() {
-            this.isEnd = false;
-            this.valueOfLeft += this.valueOffset;
-            const isOvered = this.valueOfLeft > 0;
-            const isClose = Math.abs(this.valueOfLeft) < this.valueOffset;
-            if (isOvered || isClose) this.valueOfLeft = 0;
-            this.$refs.categoryBar.style.left = this.valueOfLeft + "px";
+            targetElement.style.left = this.valueOfLeft + "px";
         },
     },
     created() {
@@ -74,10 +81,12 @@ export default {
         });
     },
     mounted() {
-        for (let link of this.$refs.links) this.maxWidth += link.clientWidth;
+        for (let link of this.$refs.categoryBarLinks) this.maxWidth += link.clientWidth;
         this.resizeObs = new ResizeObserver((entries) => {
-            console.log(entries[0].contentRect.width, this.isOverflow);
-            this.isOverflow = entries[0].contentRect.width < this.maxWidth;
+            const width = entries[0].contentRect.width;
+            this.isOverflow = width < this.maxWidth;
+            const difference = Math.abs(this.valueOfLeft) + width - this.maxWidth;
+            if (difference > 0) this.scroll("left", difference);
         }).observe(this.$refs.categoryBarWrap);
     },
     beforeDestroy() {
@@ -89,6 +98,7 @@ export default {
 <style scoped>
 /* basic style settings */
 .category-bar-wrap {
+    /* display: flex; */
     width: 100%;
     position: relative;
     transition: all 2s ease-out;
@@ -100,10 +110,13 @@ export default {
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
     position: relative;
-    left: 0;
-    top: 0;
-    transition: all 0.1s ease-out;
+    transition: left 0.1s ease-out;
+}
+
+.category-bar[data-isOverflow="true"] {
+    justify-content: left !important;
 }
 
 /* category-bar__operator */
