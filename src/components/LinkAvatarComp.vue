@@ -1,10 +1,9 @@
 <template>
     <a
-        class="link-avatar"
+        :class="`link-avatar link-avatar-size--${size}`"
         :href="uselink ? `/authors/${name}` : false"
-        :class="`link-avatar-size--${size}`"
         :style="{ cursor: uselink ? 'pointer' : 'default' }">
-        <img class="link-avatar__image" v-if="src" :src="src" />
+        <img v-if="src" :src="src" />
         <span v-else>{{ name.slice(0, 1) }}</span>
     </a>
 </template>
@@ -16,27 +15,12 @@ export default {
         src: String,
         name: String,
         uselink: Boolean,
-        size: {
-            type: String,
-            default: "medium",
-        },
+        size: { type: String, default: "medium" },
     },
 };
 </script>
 
 <style scoped>
-.link-avatar-size--medium {
-    --size: 46px;
-}
-
-.link-avatar-size--big {
-    --size: 96px;
-}
-
-.link-avatar-size--small {
-    --size: 30px;
-}
-
 .link-avatar {
     display: flex;
     align-items: center;
@@ -49,14 +33,26 @@ export default {
     border-radius: 50%;
     font-size: 14px;
     user-select: none;
-}
 
-.link-avatar img {
-    transition: all 0.16s ease;
-    width: 120%;
-}
+    & img {
+        transition: all 0.16s ease;
+        width: 120%;
 
-.link-avatar img:hover {
-    filter: brightness(1.2);
+        &:hover {
+            filter: brightness(1.2);
+        }
+    }
+
+    &.link-avatar-size--medium {
+        --size: 46px;
+    }
+
+    &.link-avatar-size--big {
+        --size: 96px;
+    }
+
+    &.link-avatar-size--small {
+        --size: 30px;
+    }
 }
 </style>

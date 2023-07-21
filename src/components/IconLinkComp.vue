@@ -1,18 +1,19 @@
 <template>
-    <div class="icon-link-wrap" :class="`icon-link-style--${theme}`">
+    <div :class="`icon-link-wrap icon-link-theme--${theme}`">
         <!-- 链接 -->
-        <a class="icon-link" :href="href" @click="$emit('clickfn')">
+        <a :href="href" @click="$emit('clickfn')">
             <!-- 加载图标 -->
-            <i v-if="loading" class="icon-link__icon icon-link__loading-icon iconfont icon-loading"></i>
+            <i v-if="loading" class="link-icon loading-icon iconfont icon-loading"></i>
             <!-- 链接图标 -->
-            <i v-else v-show="iconfont" class="iconfont" :class="iconfont && 'icon-link__icon ' + iconfont"></i>
+            <i v-else-if="iconfont" :class="`link-icon iconfont ${iconfont}`"></i>
             <!-- 链接文字 -->
             <slot>
-                <span>{{ name }}</span>
+                <!-- span标签用于页面响应式隐藏 -->
+                <span class="link-name">{{ name }}</span>
             </slot>
         </a>
         <!-- 按钮右上角数字标记 -->
-        <span v-if="count" class="icon-link__count">{{ count }}</span>
+        <span v-if="count" class="link-counter">{{ count }}</span>
     </div>
 </template>
 
@@ -25,58 +26,51 @@ export default {
         count: Number,
         name: String,
         loading: Boolean,
-        theme: {
-            type: String,
-            default: "white",
-        },
+        theme: { type: String, default: "white" },
     },
 };
 </script>
 
 <style scoped>
-/* basic style settings */
+/* icon-link-wrap (basic style settings) */
 .icon-link-wrap {
+    --link-counter-size: 21px;
+
     height: 40px;
     position: relative;
     user-select: none;
-    /* transition: all 0.2s ease-in-out; */
     flex: none;
+
+    & a {
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        height: 100%;
+        padding: 0 16px;
+        flex: none;
+        font-size: 14px;
+        cursor: pointer;
+        gap: 8px;
+    }
+
+    & .link-counter {
+        width: var(--link-counter-size);
+        height: var(--link-counter-size);
+        line-height: calc(var(--link-counter-size) - 2px);
+        box-sizing: border-box;
+        position: absolute;
+        right: -8px;
+        top: -8px;
+        background-color: white;
+        border-radius: 50%;
+        font-size: 12px;
+        text-align: center;
+        box-shadow: 0 0 5px 2px #eee;
+        border: 1px solid #4f4f4f;
+    }
 }
 
-.icon-link {
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-    height: 100%;
-    padding: 0 16px;
-    flex: none;
-    font-size: 14px;
-    cursor: pointer;
-    gap: 8px;
-}
-
-.icon-link__count {
-    --size: 21px;
-    width: var(--size);
-    height: var(--size);
-    line-height: calc(var(--size) - 2px);
-    box-sizing: border-box;
-    position: absolute;
-    right: -8px;
-    top: -8px;
-    background: white;
-    border-radius: 50%;
-    font-size: 12px;
-    text-align: center;
-    box-shadow: 0 0 5px 2px #eee;
-    border: 1px solid #4f4f4f;
-}
-
-.icon-link__loading-icon {
-    -webkit-animation: rotation 1s ease-in-out infinite;
-    animation: rotation 1s ease-in-out infinite;
-}
-
+/* 记载图标动画 */
 @keyframes rotation {
     0% {
         transform: rotate(0deg);
@@ -87,96 +81,111 @@ export default {
     }
 }
 
+.link-icon.loading-icon {
+    -webkit-animation: rotation 1s ease-in-out infinite;
+    animation: rotation 1s ease-in-out infinite;
+}
+
 /* 响应式 */
 @media screen and (max-width: 912px) {
-    .icon-link span {
+    .link-name {
         display: none;
     }
 }
 
-/* icon-link-style--white */
-.icon-link-style--white .icon-link {
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: var(--bd-rds-6);
-    color: #4f4f4f;
-    transition: all 0.16s ease-out;
+/* icon-link-theme--white */
+.icon-link-theme--white {
+    & a {
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        color: #4f4f4f;
+        transition: all 0.16s ease-out;
+
+        &:active {
+            background-color: #f0f0f0;
+            border: 1px solid #f0f0f0;
+        }
+    }
 }
 
-.icon-link-style--white .icon-link:active {
-    background: #f0f0f0;
-    border: 1px solid #f0f0f0;
+/* icon-link-theme--blue */
+.icon-link-theme--blue {
+    & a {
+        background-color: rgb(20, 153, 236);
+        border-radius: 6px;
+        color: white;
+        font-weight: 700;
+
+        &:hover {
+            background-color: rgba(20, 153, 236, 0.8);
+        }
+    }
 }
 
-/* icon-link-style--blue */
-.icon-link-style--blue .icon-link {
-    background: rgb(20, 153, 236);
-    border-radius: var(--bd-rds-6);
-    color: white;
-    font-weight: 700;
+/* icon-link-theme--pink */
+.icon-link-theme--pink {
+    & a {
+        background: rgb(237, 89, 113);
+        border-radius: var(--bd-rds-6);
+        color: white;
+        transition: all 0.16s ease-out;
+    }
 }
 
-.icon-link-style--blue .icon-link:hover {
-    background: rgba(20, 153, 236, 0.8);
+/* icon-link-theme--light-pink */
+.icon-link-theme--light-pink {
+    & a {
+        background: white;
+        border: 1px solid rgb(237, 89, 113);
+        border-radius: var(--bd-rds-6);
+        color: rgb(237, 89, 113);
+        transition: all 0.16s ease-out;
+    }
 }
 
-/* icon-link-style--pink */
-.icon-link-style--pink .icon-link {
-    background: rgb(237, 89, 113);
-    border-radius: var(--bd-rds-6);
-    color: white;
-    transition: all 0.16s ease-out;
+/* icon-link-theme--gray */
+.icon-link-theme--gray {
+    & a {
+        background: rgb(241, 240, 240);
+        border-radius: var(--bd-rds-6);
+        color: black;
+        font-weight: 700;
+        transition: all 0.16s ease-out;
+    }
 }
 
-/* icon-link-style--light-pink */
-.icon-link-style--light-pink .icon-link {
-    background: white;
-    border: 1px solid rgb(237, 89, 113);
-    border-radius: var(--bd-rds-6);
-    color: rgb(237, 89, 113);
-    transition: all 0.16s ease-out;
-}
-
-/* icon-link-style--gray */
-.icon-link-style--gray .icon-link {
-    background: rgb(241, 240, 240);
-    border-radius: var(--bd-rds-6);
-    color: black;
-    font-weight: 700;
-    transition: all 0.16s ease-out;
-}
-
-/* icon-link-style--tag */
-.icon-link-style--tag {
+/* icon-link-theme--tag */
+.icon-link-theme--tag {
     height: auto !important;
+
+    & a {
+        padding: 6px 10px !important;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: var(--bd-rds-6);
+        color: #4f4f4f;
+        font-size: inherit !important;
+    }
 }
 
-.icon-link-style--tag .icon-link {
-    padding: 6px 10px !important;
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: var(--bd-rds-6);
-    color: #4f4f4f;
-    font-size: inherit !important;
-}
-
-/* icon-link-style--small */
-.icon-link-style--small {
+/* icon-link-theme--small */
+.icon-link-theme--small {
     height: 30px !important;
-}
 
-.icon-link-style--small .icon-link {
-    height: 30px !important;
-    font-size: 16px !important;
-    background-color: white;
-    border-radius: var(--bd-rds-6);
-    color: #999;
-    transition: all 0.3s linear;
-    flex: none;
-    padding: 3px 9px !important;
-}
+    & a {
+        height: 30px !important;
+        font-size: 16px !important;
+        background-color: white;
+        border-radius: var(--bd-rds-6);
+        color: #999;
+        transition: all 0.3s linear;
+        flex: none;
+        padding: 3px 9px !important;
 
-.icon-link-style--small .icon-link:hover {
-    background: #eee;
+        &:hover {
+            background-color: #eee;
+        }
+    }
 }
 </style>

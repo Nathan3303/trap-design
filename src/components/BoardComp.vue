@@ -12,7 +12,7 @@
         <!-- 显示面板内容 -->
         <template v-else-if="data && data.length != 0">
             <!-- 显示面板 -->
-            <main class="board">
+            <main>
                 <board-node
                     v-for="(item, index) in data"
                     :key="item.id"
@@ -23,14 +23,12 @@
                     :route="route" />
             </main>
             <!-- 显示面板到底文字 -->
-            <div class="board__end">
+            <footer>
                 <slot name="end-text">已经到底啦</slot>
-            </div>
+            </footer>
         </template>
         <!-- 显示无内容文字 -->
-        <board-empty class="mg-t144" v-else>
-            <slot name="empty-text"></slot>
-        </board-empty>
+        <board-empty class="board__empty" v-else />
     </div>
 </template>
 
@@ -70,7 +68,7 @@ export default {
     margin-top: 144px;
 }
 
-.board {
+main {
     width: 100%;
     display: grid;
     grid-gap: 36px;
@@ -79,7 +77,7 @@ export default {
     margin: 32px 0;
 }
 
-.board__end {
+footer {
     font-size: 14px;
     font-weight: 700;
     text-align: center;
@@ -88,5 +86,9 @@ export default {
     padding: 8px 0;
     color: #afafaf;
     margin-bottom: 16px;
+}
+
+.board__empty {
+    margin-top: 144px;
 }
 </style>

@@ -1,16 +1,16 @@
 <template>
-    <div class="flex-none" @mouseover="hover = true" @mouseleave="hover = false">
+    <div @mouseover="isHover = true" @mouseleave="isHover = false">
         <!-- 取消喜爱按钮 -->
         <icon-link
             v-if="isLiked"
-            :iconfont="hover ? 'icon-wrong' : 'icon-like'"
+            :iconfont="isHover ? 'icon-wrong' : 'icon-like'"
             theme="light-pink"
-            :loading="loading"
-            @clickfn="unlikeHandler()">
-            <span v-show="hover">取消喜爱</span>
+            :loading="isLoading"
+            @clickfn="clickHandler(0)">
+            <span v-show="isHover">取消喜爱</span>
         </icon-link>
         <!-- 喜爱按钮 -->
-        <icon-link v-else iconfont="icon-like" theme="pink" :loading="loading" @clickfn="likeHandler()">设为喜爱</icon-link>
+        <icon-link v-else iconfont="icon-like" theme="pink" :loading="isLoading" @clickfn="clickHandler(1)">设为喜爱</icon-link>
     </div>
 </template>
 
@@ -25,18 +25,20 @@ export default {
     data() {
         return {
             isLiked: this.liked,
-            loading: false,
-            hover: false,
+            isHover: false,
+            isLoading: false,
+            debounceTimer: null,
         };
     },
     methods: {
-        likeHandler() {
-            this.loading = true;
-            this.$emit("like");
-        },
-        unlikeHandler() {
-            this.loading = true;
-            this.$emit("unlike");
+        clickHandler(flag) {
+            this.isLoading = true;
+            if (this.debounceTimer) clearTimeout(this.debounceTimer);
+            const _this = this;
+            this.debounceTimer = setTimeout(function () {
+                this.debounceTimer = null;
+                flag ? _this.$emit("like") : _this.$emit("unlike");
+            }, 200);
         },
     },
     watch: {
@@ -44,7 +46,7 @@ export default {
             const _this = this;
             setTimeout(function () {
                 _this.isLiked = newValue;
-                _this.loading = false;
+                _this.isLoading = false;
             }, 300);
         },
     },

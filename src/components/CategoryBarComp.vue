@@ -1,12 +1,8 @@
 <template>
-    <div class="category-bar-wrap" :class="`category-bar-style--${theme}`" ref="categoryBarWrap">
-        <span class="category-bar__operator left" v-show="isOverflow && valueOfLeft" @click="scroll('left', valueOffset)">
-            &lt;
-        </span>
-        <span class="category-bar__operator right" v-show="isOverflow && !isEnd" @click="scroll('right', valueOffset)">
-            &gt;
-        </span>
-        <div class="category-bar" ref="categoryBar" :data-isOverflow="isOverflow">
+    <div class="category-bar-wrap" :class="`category-bar-theme--${theme}`" ref="categoryBarWrap">
+        <span class="operator left" v-show="isOverflow && valueOfLeft" @click="scroll('left', valueOffset)"> &lt; </span>
+        <span class="operator right" v-show="isOverflow && !isEnd" @click="scroll('right', valueOffset)"> &gt; </span>
+        <main ref="categoryBar" :data-is-overflow="isOverflow">
             <a
                 v-for="(item, idx) in options"
                 ref="categoryBarLinks"
@@ -15,7 +11,7 @@
                 @click.prevent="clickHandler($event, idx)">
                 {{ item.name }}
             </a>
-        </div>
+        </main>
     </div>
 </template>
 
@@ -96,77 +92,77 @@ export default {
 </script>
 
 <style scoped>
-/* basic style settings */
+/* category-bar-wrap (basic style settings) */
 .category-bar-wrap {
-    /* display: flex; */
     width: 100%;
     position: relative;
     transition: all 2s ease-out;
     min-width: 128px;
     overflow: hidden;
+
+    & .operator {
+        position: absolute;
+        font-family: "Consolas";
+        font-size: 16px;
+        font-weight: bold;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        display: block;
+        cursor: pointer;
+        color: black;
+        z-index: 2;
+
+        &.left {
+            left: 0;
+            padding: 0 16px 0 8px;
+            background: linear-gradient(to right, #ffffffff, #ffffffff, #ffffffee, #ffffffaa, #ffffff00);
+        }
+
+        &.right {
+            right: 0;
+            padding: 0 8px 0 16px;
+            background: linear-gradient(to left, #ffffffff, #ffffffff, #ffffffee, #ffffffaa, #ffffff00);
+        }
+    }
+
+    & main {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        transition: left 0.1s ease-out;
+
+        &[data-is-overflow="true"] {
+            justify-content: left !important;
+        }
+    }
 }
 
-.category-bar {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    transition: left 0.1s ease-out;
-}
+/* category-bar-theme--gray */
+.category-bar-theme--gray main {
+    & a {
+        --h: 40px;
+        height: var(--h);
+        line-height: var(--h);
+        padding: 0 16px;
+        flex: none;
+        background: white;
+        border-radius: var(--bd-rds-6);
+        color: #aaa;
+        font-size: 16px;
+        font-weight: 700;
+        transition: all 0.2s ease-in-out;
 
-.category-bar[data-isOverflow="true"] {
-    justify-content: left !important;
-}
+        &:hover {
+            color: black;
+        }
+    }
 
-/* category-bar__operator */
-.category-bar__operator {
-    position: absolute;
-    font-family: "Consolas";
-    font-size: 16px;
-    font-weight: bold;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    display: block;
-    cursor: pointer;
-    color: black;
-    z-index: 2;
-}
-
-.left {
-    left: 0;
-    padding: 0 16px 0 8px;
-    background: linear-gradient(to right, #ffffffff, #ffffffff, #ffffffee, #ffffffaa, #ffffff00);
-}
-
-.right {
-    right: 0;
-    padding: 0 8px 0 16px;
-    background: linear-gradient(to left, #ffffffff, #ffffffff, #ffffffee, #ffffffaa, #ffffff00);
-}
-
-/* category-bar-style--gray */
-.category-bar-style--gray a {
-    --h: 40px;
-    height: var(--h);
-    line-height: var(--h);
-    padding: 0 16px;
-    flex: none;
-    background: white;
-    border-radius: var(--bd-rds-6);
-    color: #aaa;
-    font-size: 16px;
-    font-weight: 700;
-    transition: all 0.2s ease-in-out;
-}
-
-.category-bar-style--gray a:hover {
-    color: black;
-}
-
-.category-bar-style--gray .active {
-    background: rgb(243, 243, 244) !important;
-    color: black !important;
+    .active {
+        background: rgb(243, 243, 244) !important;
+        color: black !important;
+    }
 }
 </style>

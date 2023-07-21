@@ -25,13 +25,12 @@ export default {
 </script>
 
 <style scoped>
-/* shot-detail__content */
 .shot-content {
     margin: 24px 0;
     color: black;
-}
 
-.shot-content p {
-    margin-bottom: 16px;
+    & p {
+        margin-bottom: 16px;
+    }
 }
 </style>

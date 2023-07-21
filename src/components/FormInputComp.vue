@@ -1,18 +1,18 @@
 <template>
-    <div class="form-input-wrap" :class="`form-input-style--${theme}`">
+    <div :class="`form-input-wrap form-input-theme--${theme}`">
         <!-- 输入框标题栏 -->
-        <p v-if="label" class="form-input-label">
+        <p v-if="label" class="input-label">
             <!-- 标题文字 -->
-            <span class="form-input-label-text">{{ label }}</span>
+            <span class="label-text">{{ label }}</span>
             <!-- 输入框内容清除按钮 -->
-            <a v-show="inputValue" class="form-input-clear-btn" @click="clear()">清除</a>
+            <a v-show="inputValue" class="clear-btn" @click="clear()">清除</a>
         </p>
         <!-- 输入框主体 -->
-        <div class="form-input-main" :data-is-focus="focused">
+        <main :data-is-focus="focused">
             <!-- 输入框图标 -->
-            <i v-if="iconfont" class="form-input-icon iconfont" :class="iconfont"></i>
+            <i v-if="iconfont" :class="`input-icon iconfont ${iconfont}`"></i>
             <!-- 输入框前置文字 -->
-            <span v-if="pretext" v-show="focused || inputValue" class="form-input-pretext">{{ pretext }}</span>
+            <span v-if="pretext" v-show="focused || inputValue" class="input-pretext">{{ pretext }}</span>
             <!-- 输入框本体 -->
             <input
                 class="form-input"
@@ -24,10 +24,10 @@
                 @focusin="focused = true"
                 @focusout="focusOutEventHandler()"
                 @keydown.enter="submit()" />
-            <a class="form-input-clear-btn2" v-if="!label && inputValue" @click.stop="clear">
+            <a class="clear-btn2" v-if="!label && inputValue" @click.stop="clear">
                 <i class="iconfont icon-wrong"></i>
             </a>
-        </div>
+        </main>
     </div>
 </template>
 
@@ -43,15 +43,13 @@ export default {
         maxlength: Number,
         name: String,
         rmfo: Boolean,
-        theme: {
-            type: String,
-            default: "blue",
-        },
+        theme: { type: String, default: "blue" },
     },
     data() {
         return {
             inputValue: this.value || "",
             focused: false,
+            debounceTimer: null,
         };
     },
     methods: {
@@ -65,8 +63,13 @@ export default {
                 });
         },
         submit: function () {
-            this.focused = false;
-            this.$emit("put", this.inputValue, this.name);
+            if (this.debounceTimer) clearTimeout(this.debounceTimer);
+            const _this = this;
+            this.debounceTimer = setTimeout(function () {
+                _this.debounceTimer = null;
+                _this.focused = false;
+                _this.$emit("put", _this.inputValue, _this.name);
+            }, 100);
         },
         focusOutEventHandler: function () {
             this.focused = false;
@@ -82,105 +85,111 @@ export default {
 </script>
 
 <style scoped>
-/* basic style settings */
+/* form-input-wrap (basic style settings) */
 .form-input-wrap {
     display: flex;
     flex-direction: column;
     background: white;
     position: relative;
     box-sizing: border-box;
+
+    & .input-label {
+        margin-bottom: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        user-select: none;
+        display: flex;
+        align-items: center;
+
+        & .label-text {
+            flex: auto;
+        }
+
+        & .clear-btn {
+            font-size: 12px;
+            cursor: pointer;
+        }
+    }
+
+    & main {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        padding: 0 6px 0 12px;
+        border: 1px solid #eee;
+        box-sizing: border-box;
+        border-radius: var(--bd-rds-6);
+        background: rgb(243, 243, 244);
+        transition: all 0.3s ease;
+
+        & .input-icon {
+            font-size: 21px;
+            margin-right: 10px;
+            color: var(--primary-bg-clr);
+        }
+
+        & .input-pretext {
+            font-size: 14px;
+            color: black;
+            margin-right: 4px;
+        }
+
+        & input {
+            flex: auto;
+            width: 100%;
+            height: 40px;
+            border: none;
+            outline: none;
+            background: none;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        & .clear-btn2 {
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            text-align: center;
+            cursor: pointer;
+            color: #6f6f6f;
+            border-radius: 50%;
+            flex: none;
+            scale: 0.8;
+        }
+    }
 }
 
-.form-input-label {
-    margin-bottom: 8px;
-    font-size: 16px;
-    font-weight: 700;
-    user-select: none;
-    display: flex;
-    align-items: center;
+/* form-input-theme--blue */
+.form-input-theme--blue {
+    & .input-label .clear-btn {
+        color: var(--primary-bg-clr);
+
+        &:hover {
+            color: rgb(243, 72, 42);
+        }
+    }
+
+    & main {
+        &:hover {
+            background-color: white;
+            box-shadow: 0 0 5px 2px rgb(20, 153, 236);
+            border: 1px solid #eee;
+        }
+
+        &[data-is-focus="true"] {
+            background: white;
+            border: 1px solid rgb(20, 153, 236);
+            box-shadow: 0 0 5px 2px rgb(20, 153, 236);
+        }
+    }
 }
 
-.form-input-label-text {
-    flex: auto;
-}
-
-.form-input-main {
-    width: 100%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    padding: 0 6px 0 12px;
-    border: 1px solid #eee;
-    box-sizing: border-box;
-    border-radius: var(--bd-rds-6);
-    background: rgb(243, 243, 244);
-    transition: all 0.3s ease;
-}
-
-.form-input-icon {
-    font-size: 21px;
-    margin-right: 10px;
-    color: var(--primary-bg-clr);
-}
-
-.form-input {
-    flex: auto;
-    width: 100%;
-    height: 40px;
-    border: none;
-    outline: none;
-    background: none;
-    font-size: 14px;
-    box-sizing: border-box;
-}
-
-.form-input-pretext {
-    font-size: 14px;
-    color: black;
-    margin-right: 4px;
-}
-
-.form-input-clear-btn {
-    font-size: 12px;
-    cursor: pointer;
-}
-
-.form-input-clear-btn2 {
-    width: 24px;
-    height: 24px;
-    line-height: 24px;
-    text-align: center;
-    cursor: pointer;
-    color: #6f6f6f;
-    border-radius: 50%;
-    flex: none;
-    scale: 0.8;
-}
-
-/* form-input-style--blue */
-.form-input-style--blue .form-input-main:hover {
-    background: white;
-    box-shadow: 0 0 5px 2px rgb(20, 153, 236);
-    border: 1px solid #eee;
-}
-
-.form-input-style--blue .form-input-main[data-is-focus="true"] {
-    background: white;
-    border: 1px solid rgb(20, 153, 236);
-    box-shadow: 0 0 5px 2px rgb(20, 153, 236);
-}
-
-.form-input-style--blue .form-input-clear-btn {
-    color: var(--primary-bg-clr) !important;
-}
-
-.form-input-style--blue .form-input-clear-btn:hover {
-    color: rgb(243, 72, 42) !important;
-}
-
-/* form-input-style--crystal */
-.form-input-style--crystal .form-input-main {
-    background: none !important;
-    border: none !important;
+/* form-input-theme--crystal */
+.form-input-theme--crystal {
+    & main {
+        background: none !important;
+        border: none !important;
+    }
 }
 </style>

@@ -26,13 +26,13 @@ export default {
     flex-wrap: wrap;
     gap: 8px;
     margin-top: 36px;
-}
 
-.tag-bar p {
-    font-size: 18px;
-    color: black;
-    font-weight: 700;
-    flex: 1 1 100%;
-    margin: 8px 0;
+    & p {
+        font-size: 18px;
+        color: black;
+        font-weight: 700;
+        flex: 1 1 100%;
+        margin: 8px 0;
+    }
 }
 </style>
