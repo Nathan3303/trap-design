@@ -119,13 +119,14 @@ export default {
         padding: 0 6px 0 12px;
         border: 1px solid #eee;
         box-sizing: border-box;
-        border-radius: var(--bd-rds-6);
+        border-radius: 6px;
         background: rgb(243, 243, 244);
         transition: all 0.3s ease;
 
         & .input-icon {
             font-size: 21px;
             margin-right: 10px;
+            margin-top: -1px;
             color: var(--primary-bg-clr);
         }
 
@@ -188,8 +189,8 @@ export default {
 /* form-input-theme--crystal */
 .form-input-theme--crystal {
     & main {
-        background: none !important;
-        border: none !important;
+        background: none;
+        border: none;
     }
 }
 </style>

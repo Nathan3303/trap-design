@@ -22,10 +22,7 @@ export default {
         options: Array,
         value: String,
         matchroute: Boolean,
-        theme: {
-            type: String,
-            default: "gray",
-        },
+        theme: { type: String, default: "gray" },
     },
     data() {
         return {
