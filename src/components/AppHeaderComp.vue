@@ -17,7 +17,10 @@
         <!-- 上传作品按钮 -->
         <icon-link theme="gray" class="mg-l16">上传作品</icon-link>
         <!-- 用户头像 -->
-        <link-avatar class="app-header__user" src="/images/users/user.png" name="Jsda" />
+        <link-avatar
+            class="app-header__user"
+            src="/images/users/user.png"
+            name="Jsda" />
     </div>
 </template>
 
