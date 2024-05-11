@@ -8,7 +8,7 @@
         <form-input
             class="app-header__search-input"
             iconfont="icon-search"
-            placeholder="搜索"
+            placeholder="搜索(apple)"
             @put="(value) => (searchText = value)"
             rmfo />
         <template v-if="hasLogin">

@@ -35,7 +35,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .session-view {
     width: 100%;
     height: 100%;
@@ -68,7 +68,61 @@ export default {
         padding-left: 128px;
 
         .session-sub-view {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
             justify-content: left;
+            color: black;
+
+            & form {
+                flex: auto;
+                max-width: 360px;
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+
+                & h1 {
+                    font-weight: 26px;
+                    font-weight: 400;
+                }
+
+                .form-input-bar {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+
+                    & label {
+                        font-weight: 400;
+                    }
+                }
+
+                .bottom-text {
+                    font-size: 13px;
+
+                    & a {
+                        color: #666;
+                    }
+                }
+            }
+        }
+
+        .wide-button {
+            height: 42px;
+            border-radius: 6px;
+            outline: none;
+            border: none;
+            background-color: #ccc;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            margin-top: 16px;
+
+            &:hover {
+                background-color: #bbb;
+            }
         }
     }
 

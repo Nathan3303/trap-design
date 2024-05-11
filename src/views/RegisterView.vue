@@ -59,23 +59,7 @@ export default {
 
 <style scoped>
 .session-sub-view {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: black;
-
     & form {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-        width: 50%;
-
-        & h1 {
-            font-weight: 26px;
-            font-weight: 400;
-        }
-
         .top-form-input-bar {
             display: flex;
             gap: 2rem;
@@ -84,42 +68,6 @@ export default {
             .form-input-bar {
                 width: 50%;
             }
-        }
-
-        .form-input-bar {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-
-            & label {
-                font-weight: 400;
-            }
-        }
-
-        .bottom-text {
-            font-size: 13px;
-
-            & a {
-                color: #666;
-            }
-        }
-    }
-
-    .wide-button {
-        height: 48px;
-        border-radius: 48px;
-        outline: none;
-        border: none;
-        background-color: #666;
-        font-size: 14px;
-        font-weight: 500;
-        color: #fff;
-        cursor: pointer;
-        transition: background-color 0.2s ease-in-out;
-        margin-top: 16px;
-
-        &:hover {
-            background-color: darkslategray;
         }
     }
 }
