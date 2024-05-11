@@ -12,19 +12,29 @@
             <!-- 输入框图标 -->
             <i v-if="iconfont" :class="`input-icon iconfont ${iconfont}`"></i>
             <!-- 输入框前置文字 -->
-            <span v-if="pretext" v-show="focused || inputValue" class="input-pretext">{{ pretext }}</span>
+            <span
+                v-if="pretext"
+                v-show="focused || inputValue"
+                class="input-pretext"
+                >{{ pretext }}</span
+            >
             <!-- 输入框本体 -->
             <input
                 class="form-input"
-                type="text"
+                :type="type"
+                :id="id"
                 :placeholder="placeholder"
                 :maxlength="maxlength"
+                :autocomplete="autocomplete"
                 v-model="inputValue"
                 ref="formInput"
                 @focusin="focused = true"
                 @focusout="focusOutEventHandler()"
                 @keydown.enter="submit()" />
-            <a class="clear-btn2" v-if="!label && inputValue" @click.stop="clear">
+            <a
+                class="clear-btn2"
+                v-if="!label && inputValue"
+                @click.stop="clear">
                 <i class="iconfont icon-wrong"></i>
             </a>
         </main>
@@ -35,7 +45,10 @@
 export default {
     name: "FormInputComp",
     props: {
+        id: String,
+        type: { type: String, default: "text" },
         label: String,
+        labelSize: { type: String, default: "16px" },
         iconfont: String,
         placeholder: String,
         pretext: String,
@@ -44,6 +57,7 @@ export default {
         name: String,
         rmfo: Boolean,
         theme: { type: String, default: "blue" },
+        autocomplete: { type: String, default: "off" },
     },
     data() {
         return {
@@ -95,7 +109,7 @@ export default {
 
     & .input-label {
         margin-bottom: 8px;
-        font-size: 16px;
+        font-size: v-bind(labelSize);
         font-weight: 700;
         user-select: none;
         display: flex;
@@ -139,6 +153,7 @@ export default {
         & input {
             flex: auto;
             width: 100%;
+            min-width: 48px;
             height: 40px;
             border: none;
             outline: none;

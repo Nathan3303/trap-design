@@ -73,7 +73,8 @@ function parseQueryObject(queryObject) {
                 if (value instanceof Array) {
                     // 循环检测
                     value.forEach((item) => {
-                        if (typeof item == "string") queryString += `${key}=${item}&`;
+                        if (typeof item == "string")
+                            queryString += `${key}=${item}&`;
                     });
                     break;
                 } else {
@@ -105,4 +106,31 @@ function randomNum(minNum, maxNum) {
     return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
 }
 
-export { parseQueryObject, debounce, debounce2, debounce3, printer, warner, randomNum };
+function generateRandomString(len) {
+    const chars = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678";
+    const maxPos = chars.length;
+    let randomStr = "";
+    for (let i = 0; i < len; i++) {
+        randomStr += chars.charAt(Math.floor(Math.random() * maxPos));
+    }
+    return randomStr;
+}
+
+function isTokenExpired() {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const now = new Date().getTime();
+    const isExpired = token && now > token.expireTime;
+    return isExpired;
+}
+
+export {
+    parseQueryObject,
+    debounce,
+    debounce2,
+    debounce3,
+    printer,
+    warner,
+    randomNum,
+    generateRandomString,
+    isTokenExpired,
+};

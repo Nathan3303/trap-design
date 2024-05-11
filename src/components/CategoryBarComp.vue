@@ -1,7 +1,20 @@
 <template>
-    <div class="category-bar-wrap" :class="`category-bar-theme--${theme}`" ref="categoryBarWrap">
-        <span class="operator left" v-show="isOverflow && valueOfLeft" @click="scroll('left', valueOffset)"> &lt; </span>
-        <span class="operator right" v-show="isOverflow && !isEnd" @click="scroll('right', valueOffset)"> &gt; </span>
+    <div
+        class="category-bar-wrap"
+        :class="`category-bar-theme--${theme}`"
+        ref="categoryBarWrap">
+        <span
+            class="operator left"
+            v-show="isOverflow && valueOfLeft"
+            @click="scroll('left', valueOffset)">
+            &lt;
+        </span>
+        <span
+            class="operator right"
+            v-show="isOverflow && !isEnd"
+            @click="scroll('right', valueOffset)">
+            &gt;
+        </span>
         <main ref="categoryBar" :data-is-overflow="isOverflow">
             <a
                 v-for="(item, idx) in options"
@@ -55,10 +68,17 @@ export default {
                     break;
                 case "right":
                     this.valueOfLeft -= offset;
-                    isOvered = Math.abs(this.valueOfLeft) + targetElement.clientWidth > this.maxWidth;
-                    isClose = this.maxWidth - (Math.abs(this.valueOfLeft) + targetElement.clientWidth) < offset;
+                    isOvered =
+                        Math.abs(this.valueOfLeft) + targetElement.clientWidth >
+                        this.maxWidth;
+                    isClose =
+                        this.maxWidth -
+                            (Math.abs(this.valueOfLeft) +
+                                targetElement.clientWidth) <
+                        offset;
                     if (isOvered || isClose) {
-                        this.valueOfLeft = 0 - (this.maxWidth - targetElement.clientWidth);
+                        this.valueOfLeft =
+                            0 - (this.maxWidth - targetElement.clientWidth);
                         this.isEnd = true;
                     }
             }
@@ -74,16 +94,22 @@ export default {
         });
     },
     mounted() {
-        for (let link of this.$refs.categoryBarLinks) this.maxWidth += link.clientWidth;
+        for (let link of this.$refs.categoryBarLinks)
+            this.maxWidth += link.clientWidth;
         this.resizeObs = new ResizeObserver((entries) => {
             const width = entries[0].contentRect.width;
             this.isOverflow = width < this.maxWidth;
-            const difference = Math.abs(this.valueOfLeft) + width - this.maxWidth;
+            const difference =
+                Math.abs(this.valueOfLeft) + width - this.maxWidth;
             if (difference > 0) this.scroll("left", difference);
         }).observe(this.$refs.categoryBarWrap);
     },
     beforeDestroy() {
         this.resizeObs.disconnect();
+    },
+    beforeRouteLeave(to, from, next) {
+        this.resizeObs.disconnect();
+        next();
     },
 };
 </script>
@@ -113,13 +139,27 @@ export default {
         &.left {
             left: 0;
             padding: 0 16px 0 8px;
-            background: linear-gradient(to right, #ffffffff, #ffffffff, #ffffffee, #ffffffaa, #ffffff00);
+            background: linear-gradient(
+                to right,
+                #ffffffff,
+                #ffffffff,
+                #ffffffee,
+                #ffffffaa,
+                #ffffff00
+            );
         }
 
         &.right {
             right: 0;
             padding: 0 8px 0 16px;
-            background: linear-gradient(to left, #ffffffff, #ffffffff, #ffffffee, #ffffffaa, #ffffff00);
+            background: linear-gradient(
+                to left,
+                #ffffffff,
+                #ffffffff,
+                #ffffffee,
+                #ffffffaa,
+                #ffffff00
+            );
         }
     }
 

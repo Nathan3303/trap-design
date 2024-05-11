@@ -1,5 +1,5 @@
 <template>
-    <div class="board-wrap">
+    <div ref="boardRef" class="board-wrap">
         <!-- 显示标题 -->
         <h2 v-if="title">
             <span>{{ title }}</span>

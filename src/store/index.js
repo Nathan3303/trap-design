@@ -13,6 +13,7 @@ const store = new Vuex.Store({
     getters: {},
 
     modules: {
+        
         appMain: appMainStoreModule,
         shotDetails: shotDetailsStoreModule,
         author: authorStoreModule,

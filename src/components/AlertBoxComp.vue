@@ -1,7 +1,10 @@
 <template>
     <div class="alert-box-wrap">
         <transition name="alert-box">
-            <div v-show="isShow" class="alert-box" :class="`alert-box-type--${type}`">
+            <div
+                v-show="isShow"
+                class="alert-box"
+                :class="`alert-box-type--${type}`">
                 <i class="iconfont icon-details"></i>
                 {{ message }}
             </div>
@@ -84,7 +87,13 @@ export default {
 
 /* alert-box-type--error */
 .alert-box-type--error {
-    background: rgb(255, 74, 74) !important;
-    box-shadow: 0 0 5px 2px rgb(255, 74, 74) !important;
+    background: rgb(216, 91, 91) !important;
+    box-shadow: 0 0 5px 2px rgb(216, 91, 91) !important;
+}
+
+/* alert-box-type--success */
+.alert-box-type--success {
+    background: rgb(77, 230, 100) !important;
+    box-shadow: 0 0 5px 2px rgb(77, 230, 100) !important;
 }
 </style>

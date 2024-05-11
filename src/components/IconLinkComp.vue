@@ -3,9 +3,13 @@
         <!-- 链接 -->
         <a :href="href" @click="$emit('clickfn')">
             <!-- 加载图标 -->
-            <i v-if="loading" class="link-icon loading-icon iconfont icon-loading"></i>
+            <i
+                v-if="loading"
+                class="link-icon loading-icon iconfont icon-loading"></i>
             <!-- 链接图标 -->
-            <i v-else-if="iconfont" :class="`link-icon iconfont ${iconfont}`"></i>
+            <i
+                v-else-if="iconfont"
+                :class="`link-icon iconfont ${iconfont}`"></i>
             <!-- 链接文字 -->
             <slot>
                 <!-- span标签用于页面响应式隐藏 -->
@@ -186,6 +190,17 @@ export default {
         &:hover {
             background-color: #eee;
         }
+    }
+}
+
+/* icon-link-theme--transparent */
+.icon-link-theme--transparent {
+    & a {
+        background: transparent;
+        border-radius: var(--bd-rds-6);
+        color: black;
+        font-weight: 700;
+        transition: all 0.16s ease-out;
     }
 }
 </style>

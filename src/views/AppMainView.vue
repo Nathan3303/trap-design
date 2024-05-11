@@ -4,11 +4,21 @@
         <!-- App主体头部 -->
         <header class="app-main__header">
             <!-- 下拉列表按钮 -->
-            <btn-dropdown iconfont="icon-search" :options="viewOptions" matchroute />
+            <btn-dropdown
+                iconfont="icon-search"
+                :options="viewOptions"
+                matchroute />
             <!-- 分类筛选栏 -->
-            <category-bar class="mg-h32" :options="categoryOptions" matchroute />
+            <category-bar
+                class="mg-h32"
+                :options="categoryOptions"
+                matchroute />
             <!-- 过滤按钮 -->
-            <icon-link @clickfn="showFilter = !showFilter" iconfont="icon-filter" name="过滤" :count="filterCounter" />
+            <icon-link
+                @clickfn="showFilter = !showFilter"
+                iconfont="icon-filter"
+                name="过滤"
+                :count="filterCounter" />
         </header>
         <!-- 过滤选项 -->
         <transition name="filter-options">
@@ -35,7 +45,10 @@
             </div>
         </transition>
         <!-- 作品展示路由视图 -->
-        <board :loading="loading" :data="shots" route="shot-details-popup"></board>
+        <board
+            :loading="loading"
+            :data="shots"
+            route="shot-details-popup"></board>
         <!-- 作品详情路由视图 -->
         <router-view name="ShotDetailsPopupView"></router-view>
     </div>
@@ -96,8 +109,12 @@ export default {
         $route: {
             immediate: true,
             handler({ params }) {
-                this.categoryOptions.forEach((item) => (item.to.params.view = params.view));
-                this.viewOptions.forEach((item) => (item.to.params.category = params.category));
+                this.categoryOptions.forEach(
+                    (item) => (item.to.params.view = params.view)
+                );
+                this.viewOptions.forEach(
+                    (item) => (item.to.params.category = params.category)
+                );
             },
         },
     },
@@ -105,8 +122,11 @@ export default {
         this.fetchData(this.$route.params);
     },
     beforeRouteUpdate(to, from, next) {
-        if (from.name == "shots" && to.name == "shots") this.fetchData(to.params);
-        next();
+        requestAnimationFrame(() => {
+            if (from.name == "shots" && to.name == "shots")
+                this.fetchData(to.params);
+            next();
+        });
     },
 };
 </script>

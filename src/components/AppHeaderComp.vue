@@ -1,10 +1,7 @@
 <template>
     <div class="app-header flex flex-center">
         <!-- logo -->
-        <a class="app-header__logo" href="/">
-            <i class="app-header__logo__icon iconfont icon-design"></i>
-            <span class="app-header__logo__text">TrapDesign</span>
-        </a>
+        <app-logo />
         <!-- 填充 -->
         <div class="blank"></div>
         <!-- 搜索框 -->
@@ -14,27 +11,42 @@
             placeholder="搜索"
             @put="(value) => (searchText = value)"
             rmfo />
-        <!-- 上传作品按钮 -->
-        <icon-link theme="gray" class="mg-l16">上传作品</icon-link>
-        <!-- 用户头像 -->
-        <link-avatar
-            class="app-header__user"
-            src="/images/users/user.png"
-            name="Jsda" />
+        <template v-if="hasLogin">
+            <!-- 上传作品按钮 -->
+            <icon-link theme="gray" class="mg-l16">上传作品</icon-link>
+            <!-- 用户头像 -->
+            <link-avatar
+                class="app-header__user"
+                src="/images/users/user.png"
+                name="Jsda" />
+        </template>
+        <template v-else>
+            <!-- 登录按钮 -->
+            <icon-link href="/session/login" theme="transparent" class="mg-l16">
+                登录
+            </icon-link>
+            <!-- 注册按钮 -->
+            <icon-link href="/session/register" theme="blue" class="mg-l16">
+                注册
+            </icon-link>
+        </template>
     </div>
 </template>
 
 <script>
+import AppLogo from "./AppLogoComp.vue";
 import FormInput from "./FormInputComp.vue";
 import IconLink from "./IconLinkComp.vue";
 import LinkAvatar from "./LinkAvatarComp.vue";
+import { isTokenExpired } from "@/utils";
 
 export default {
     name: "AppHeaderComp",
-    components: { FormInput, IconLink, LinkAvatar },
+    components: { AppLogo, FormInput, IconLink, LinkAvatar },
     data() {
         return {
             searchText: null,
+            hasLogin: false,
         };
     },
     watch: {
@@ -42,6 +54,9 @@ export default {
             if (newValue === this.$route.params.text || newValue == "") return;
             this.$router.push({ name: "search", params: { text: newValue } });
         },
+    },
+    created() {
+        this.hasLogin = !isTokenExpired();
     },
 };
 </script>
@@ -53,38 +68,6 @@ export default {
     padding: 0 24px;
     border-bottom: 1px solid #eeeeee;
     position: relative;
-}
-
-/* app-header__logo */
-.app-header__logo {
-    height: 24px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
-    color: var(--primary-bg-clr);
-    text-decoration: none;
-}
-
-.app-header__logo:hover {
-    color: #868686;
-}
-
-.app-header__logo:active {
-    scale: 0.96;
-}
-
-.app-header__logo__icon {
-    font-size: 24px;
-    margin-top: -6px;
-    margin-right: 4px;
-    font-weight: 700;
-}
-
-.app-header__logo__text {
-    font-family: "Consolas";
-    font-size: 20px;
-    font-weight: 700;
 }
 
 /* app-header__search-input */

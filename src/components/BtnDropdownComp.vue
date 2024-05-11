@@ -13,7 +13,7 @@
                 <a
                     v-for="(item, idx) in options"
                     :key="item.value"
-                    :class="{ active: idx == pointer }"
+                    :class="{ active: idx === pointer }"
                     @click.prevent="clickHandler($event, idx)">
                     {{ item.name }}
                 </a>
