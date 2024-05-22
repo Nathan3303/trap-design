@@ -1,7 +1,11 @@
 <template>
     <div class="board-node">
         <!-- 缩略图链接 -->
-        <a @click="linkToDetails(data.id)" class="thumbnail-link" @mouseover="isHover = true" @mouseleave="isHover = false">
+        <a
+            @click="linkToDetails(data.id)"
+            class="thumbnail-link"
+            @mouseover="isHover = true"
+            @mouseleave="isHover = false">
             <!-- 缩略图 -->
             <img :src="data.thumbnail" :data-hover="isHover" alt="thumbnail" />
             <!-- 标题栏 -->
@@ -14,11 +18,21 @@
         <!-- 底部信息栏 -->
         <div class="information flex flex-center" v-if="!light">
             <!-- 作者头像 -->
-            <link-avatar :src="data.author.headpic" :name="data.author.name" size="small" uselink />
+            <link-avatar
+                :src="data.author.headpic"
+                :name="data.author.name"
+                size="small"
+                uselink />
             <!-- 作者名称 -->
-            <a class="author-link" :title="data.author.description" :href="`/authors/${data.author.name}`">
-                {{ data.author.fullname }}
-            </a>
+            <router-link
+                :to="{
+                    name: 'author',
+                    params: { name: data.author.name },
+                }">
+                <a class="author-link" :title="data.author.description">
+                    {{ data.author.fullname }}
+                </a>
+            </router-link>
             <div class="lav">
                 <!-- 喜爱数 -->
                 <span>
@@ -102,7 +116,11 @@ export default {
             position: absolute;
             bottom: 0;
             z-index: 1;
-            background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8));
+            background: linear-gradient(
+                rgba(0, 0, 0, 0),
+                rgba(0, 0, 0, 0.5),
+                rgba(0, 0, 0, 0.8)
+            );
             transition: all 0.2s linear;
 
             & .title {

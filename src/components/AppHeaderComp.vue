@@ -22,13 +22,13 @@
         </template>
         <template v-else>
             <!-- 登录按钮 -->
-            <icon-link href="/session/login" theme="transparent" class="mg-l16">
-                登录
-            </icon-link>
+            <router-link :to="{ name: 'login' }">
+                <icon-link theme="transparent" class="mg-l16"> 登录 </icon-link>
+            </router-link>
             <!-- 注册按钮 -->
-            <icon-link href="/session/register" theme="blue" class="mg-l16">
-                注册
-            </icon-link>
+            <router-link :to="{ name: 'register' }">
+                <icon-link theme="blue" class="mg-l16"> 注册 </icon-link>
+            </router-link>
         </template>
     </div>
 </template>

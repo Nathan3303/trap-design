@@ -1,26 +1,52 @@
 <template>
     <div class="shot-details" id="shot-details">
         <!-- 加载文字 (loading为真值时优先显示) -->
-        <div v-if="loading" class="shot-details__loading">正在加载画作详情...</div>
+        <div v-if="loading" class="shot-details__loading">
+            正在加载画作详情...
+        </div>
         <!-- 画作详细 -->
         <div v-else-if="shot">
             <!-- 画作基本信息（头部信息区） -->
             <header class="shot-details__header">
-                <link-avatar :src="shot.author.headpic" :name="shot.author.name" uselink />
+                <link-avatar
+                    :src="shot.author.headpic"
+                    :name="shot.author.name"
+                    uselink />
                 <div class="shot-details__info">
                     <span class="shot-details__title">{{ shot.title }}</span>
                     <span class="shot-details__author">
-                        <a :href="`/authors/${shot.author.name}`">{{ shot.author.fullname }}</a>
+                        <router-link
+                            :to="{
+                                name: 'author',
+                                params: { name: shot.author.name },
+                            }">
+                            <a>{{ shot.author.fullname }}</a>
+                        </router-link>
                     </span>
                 </div>
                 <div class="shot-details__header__btns">
-                    <icon-link name="分享" iconfont="icon-share" theme="gray" @clickfn="copyShareLink(shot.id)" />
-                    <icon-link name="详情" iconfont="icon-details" theme="blue" @clickfn="showDetailsBox = true" />
-                    <like-button :liked="shot.liked" @like="likeThis" @unlike="unlikeThis" />
+                    <icon-link
+                        name="分享"
+                        iconfont="icon-share"
+                        theme="gray"
+                        @clickfn="copyShareLink(shot.id)" />
+                    <icon-link
+                        name="详情"
+                        iconfont="icon-details"
+                        theme="blue"
+                        @clickfn="showDetailsBox = true" />
+                    <like-button
+                        :liked="shot.liked"
+                        @like="likeThis"
+                        @unlike="unlikeThis" />
                 </div>
             </header>
             <!-- 显示作品图片 -->
-            <img class="shot-details__image" :src="shot.thumbnail" :alt="shot.title" @click="openImage(shot.thumbnail)" />
+            <img
+                class="shot-details__image"
+                :src="shot.thumbnail"
+                :alt="shot.title"
+                @click="openImage(shot.thumbnail)" />
             <img
                 v-for="(img, idx) in shot.images"
                 :key="idx"
@@ -28,7 +54,9 @@
                 :src="img"
                 @click="openImage(shot.thumbnail)" />
             <!-- 作品简介 (通过v-for打印简介段落) -->
-            <shot-content title="作品简介" :content="shot.content"></shot-content>
+            <shot-content
+                title="作品简介"
+                :content="shot.content"></shot-content>
             <!-- 分割线 -->
             <div class="shot-details__seperator"></div>
             <!-- 显示可能喜欢的作品 -->
@@ -103,7 +131,11 @@ export default {
         },
         fetchData: function (shotId) {
             if (!shotId || shotId == 0) {
-                window.alertbox("无效路由", "error", () => (window.location.href = "/"));
+                window.alertbox(
+                    "无效路由",
+                    "error",
+                    () => (window.location.href = "/")
+                );
                 return false;
             }
             this.$store.dispatch("shotDetails/fetchShotDetails", shotId);
