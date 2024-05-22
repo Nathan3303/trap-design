@@ -15,17 +15,13 @@
             <main>
                 <board-node
                     v-for="(item, index) in data"
-                    :key="item.id"
+                    :key="`item.id_${index}`"
                     :data="item"
                     :light="light"
                     :replace="replace"
                     :index="index"
                     :route="route" />
             </main>
-            <!-- 显示面板到底文字 -->
-            <footer>
-                <slot name="end-text">已经到底啦</slot>
-            </footer>
         </template>
         <!-- 显示无内容文字 -->
         <board-empty class="board__empty" v-else />
@@ -72,21 +68,12 @@ main {
     width: 100%;
     display: grid;
     grid-gap: 36px;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
     background: white;
     margin: 32px 0;
 }
 
-footer {
-    font-size: 14px;
-    font-weight: 700;
-    text-align: center;
-    border-radius: var(--bd-rds-6);
-    background: #f9f9f9;
-    padding: 8px 0;
-    color: #afafaf;
-    margin-bottom: 16px;
-}
+
 
 .board__empty {
     margin-top: 144px;

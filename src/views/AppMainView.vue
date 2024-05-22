@@ -45,10 +45,15 @@
             </div>
         </transition>
         <!-- 作品展示路由视图 -->
-        <board
-            :loading="loading"
-            :data="shots"
-            route="shot-details-popup"></board>
+        <infinite-scroll
+            @loadMore="handleLoadMore"
+            :nomore="isNoMore && !!shots.length">
+            <board
+                :data="shots"
+                :loading="loading"
+                route="shot-details-popup"></board>
+            <!-- <test-comp :vdata="shots" :loading="loading"></test-comp> -->
+        </infinite-scroll>
         <!-- 作品详情路由视图 -->
         <router-view name="ShotDetailsPopupView"></router-view>
     </div>
@@ -63,10 +68,18 @@ import formInput from "@/components/FormInputComp.vue";
 import categoryBar from "@/components/CategoryBarComp.vue";
 import iconLink from "@/components/IconLinkComp.vue";
 import Board from "@/components/BoardComp.vue";
+import InfiniteScroll from "@/components/InfiniteScrollComp.vue";
 
 export default {
     name: "AppMainView",
-    components: { btnDropdown, formInput, iconLink, categoryBar, Board },
+    components: {
+        btnDropdown,
+        formInput,
+        iconLink,
+        categoryBar,
+        Board,
+        InfiniteScroll,
+    },
     data() {
         return {
             categoryOptions: appMainCategoryOptions,
@@ -80,16 +93,25 @@ export default {
         formInputGetter: function (value, key) {
             this.filterInfo[key] = value;
         },
-        fetchData: function (filterInfo) {
+        fetchData: function (filterInfo, reload = false) {
             // 设置筛选信息
             this.$store.commit("appMain/setFilterInfo", filterInfo);
             // 请求数据
-            this.$store.dispatch("appMain/fetchShots");
+            this.$store.dispatch("appMain/fetchPagedShots", { reload });
+        },
+        handleLoadMore: function () {
+            // console.log("load more");
+            const params = this.$route.params;
+            this.fetchData(params);
         },
     },
     computed: {
         // 获取Vuex的States
-        ...mapState("appMain", { shots: "shots", loading: "loadingState" }),
+        ...mapState("appMain", {
+            shots: "shots",
+            loading: "loadingState",
+            isNoMore: "isNoMore",
+        }),
         // 计算筛选栏生效数
         filterCounter: function () {
             let count = 0;
@@ -102,7 +124,7 @@ export default {
         filterInfo: {
             deep: true,
             handler(newValue) {
-                this.fetchData(newValue);
+                this.fetchData(newValue, true);
             },
         },
         // 侦听路由变化，更新导航栏按钮的params
@@ -118,13 +140,11 @@ export default {
             },
         },
     },
-    created() {
-        this.fetchData(this.$route.params);
-    },
     beforeRouteUpdate(to, from, next) {
         requestAnimationFrame(() => {
-            if (from.name == "shots" && to.name == "shots")
-                this.fetchData(to.params);
+            if (from.name == "shots" && to.name == "shots") {
+                this.fetchData(to.params, true);
+            }
             next();
         });
     },

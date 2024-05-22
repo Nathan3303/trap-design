@@ -123,6 +123,30 @@ function isTokenExpired() {
     return isExpired;
 }
 
+export function filterPagedShots(value, view) {
+    let filterResult = [];
+    switch (view) {
+        case "popular":
+            filterResult = value.filter((n) => n.id % 2);
+            break;
+        case "latest":
+            filterResult = value.filter((n) => !(n.id % 2));
+            break;
+        case "following":
+            filterResult = value.filter((n) => n.id >= 20);
+            break;
+        case "random":
+            filterResult = value.filter(
+                (n) => n.id / (Math.random() * 5 + 10) > 1
+            );
+            break;
+        default:
+            filterResult = value;
+            break;
+    }
+    return filterResult;
+}
+
 export {
     parseQueryObject,
     debounce,
