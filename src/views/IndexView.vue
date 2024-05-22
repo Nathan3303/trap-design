@@ -12,8 +12,5 @@ import backToTop from "@/components/BackToTopComp.vue";
 export default {
     name: "IndexView",
     components: { appHeader, backToTop },
-    updated() {
-        console.log("IndexView updated");
-    },
 };
 </script>
