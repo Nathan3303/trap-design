@@ -7,7 +7,11 @@
             @mouseover="isHover = true"
             @mouseleave="isHover = false">
             <!-- 缩略图 -->
-            <img :src="data.thumbnail" :data-hover="isHover" alt="thumbnail" />
+            <img
+                :src="data.thumbnail"
+                :data-hover="isHover"
+                alt="thumbnail"
+                :loading="lazy" />
             <!-- 标题栏 -->
             <transition name="title-box">
                 <p v-show="isHover" class="title-box">
@@ -97,6 +101,7 @@ export default {
 
         & img {
             width: 138%;
+            height: max-content;
             transition: all 0.16s ease-in;
 
             &:hover,
