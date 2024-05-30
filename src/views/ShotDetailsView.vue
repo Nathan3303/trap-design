@@ -42,12 +42,19 @@
                 </div>
             </header>
             <!-- 显示作品图片 -->
-            <img
+            <!-- <img
                 class="shot-details__image"
                 :src="shot.thumbnail"
                 :alt="shot.title"
-                @click="openImage(shot.thumbnail)" />
-            <img
+                @click="openImage(shot.thumbnail)" /> -->
+            <div v-if="imageLoading" class="loading">图片加载中...</div>
+            <sync-image
+                class="shot-details__image"
+                :src="`${shot.thumbnail}?${shot.id}`"
+                :alt="shot.title"
+                @click="openImage(shot.thumbnail)"
+                @loaded="handleImageLoaded"></sync-image>
+            <sync-image
                 v-for="(img, idx) in shot.images"
                 :key="idx"
                 class="shot-details__image"
@@ -55,6 +62,7 @@
                 @click="openImage(shot.thumbnail)" />
             <!-- 作品简介 (通过v-for打印简介段落) -->
             <shot-content
+                v-if="!imageLoading"
                 title="作品简介"
                 :content="shot.content"></shot-content>
             <!-- 分割线 -->
@@ -93,6 +101,7 @@ import Board from "@/components/BoardComp.vue";
 import BoardEmpty from "@/components/BoardEmptyComp.vue";
 import PopupBox from "@/components/PopupBoxComp.vue";
 import BackToTop from "@/components/BackToTopComp.vue";
+import SyncImage from "@/components/SyncImageComp.vue";
 
 export default {
     name: "ShotDetailsView",
@@ -105,10 +114,12 @@ export default {
         LikeButton,
         PopupBox,
         LinkAvatar,
+        SyncImage,
     },
     data() {
         return {
             showDetailsBox: false,
+            imageLoading: true,
         };
     },
     computed: {
@@ -125,7 +136,7 @@ export default {
         },
         copyShareLink: function (shotId) {
             navigator.clipboard
-                .writeText("http://localhost:8080/shot/" + shotId)
+                .writeText("http://localhost:8080/#/shot/" + shotId)
                 .then(() => window.alertbox("分享连接已复制到剪贴板"))
                 .catch((error) => console.warn(error));
         },
@@ -147,6 +158,9 @@ export default {
         unlikeThis: function () {
             this.$store.dispatch("shotDetails/unlikeShot");
         },
+        handleImageLoaded: function () {
+            this.imageLoading = false;
+        },
     },
     watch: {
         $route: {
@@ -164,12 +178,12 @@ export default {
 .shot-details {
     height: calc(100% - var(--mg-t));
     margin-top: var(--mg-t);
-    padding: 0 calc(100vw * 0.1);
+    padding: 0 64px;
     position: relative;
     background: white;
     border-top-left-radius: var(--bd-rds-12);
     border-top-right-radius: var(--bd-rds-12);
-    transition: all 0.3s ease-out;
+    transition: all 0.36s ease-out;
     overflow: auto;
     min-width: 512px;
 }
@@ -177,13 +191,13 @@ export default {
 /* shot-detail animations */
 .shot-details-enter,
 .shot-details-leave-to {
-    width: 50%;
-    margin: 128px auto;
+    transform: translateY(64px);
     opacity: 0;
 }
 
 .shot-details-enter-to,
 .shot-details-leave {
+    transform: translateY(0);
     opacity: 1;
 }
 
@@ -242,8 +256,8 @@ export default {
 
 /* shot-detail__seperator */
 .shot-details__seperator {
-    height: 1px;
-    background: #eee;
+    height: 2px;
+    background: #99999933;
     margin: 16px 0;
 }
 
@@ -258,19 +272,7 @@ export default {
 }
 
 /* Screen width handle */
-@media screen and (min-width: 1400px) {
-    .shot-details {
-        padding: 0 calc(100vw * 0.2);
-    }
-}
-
-@media screen and (max-width: 1400px) {
-    .shot-details {
-        padding: 0 calc(100vw * 0.1);
-    }
-}
-
-@media screen and (max-width: 840px) {
+@media screen and (max-width: 800px) {
     .shot-details__header {
         flex-direction: column;
         gap: 24px;
@@ -284,9 +286,16 @@ export default {
         text-align: center;
         margin-top: 0;
     }
+}
 
-    .shot-details__author {
-        text-align: center;
+@media screen and (min-width: 1200px) {
+    .shot-details {
+        padding: 0 calc(100vw * 0.16);
     }
+}
+
+.loading {
+    padding: 20px;
+    text-align: center;
 }
 </style>

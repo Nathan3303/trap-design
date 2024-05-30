@@ -1,25 +1,39 @@
 <template>
     <div id="author-view-wrap" class="author-view-wrap">
         <!-- 显示加载动画 -->
-        <div class="author-view__loading" v-if="loading">正在加载作者信息...</div>
+        <div class="author-view__loading" v-if="loading">
+            正在加载作者信息...
+        </div>
         <!-- 显示作者基本信息 -->
         <template v-else-if="authorInfo">
             <!-- 头部：作者基本信息 -->
             <header class="author-view__header">
                 <!-- 作者信息图片展示区 -->
                 <div class="author-view__image-wrap">
-                    <img class="author-view__image" :src="authorInfo.image" />
+                    <sync-image
+                        class="author-view__image"
+                        :src="authorInfo.image" />
                     <div class="author-view__image-color"></div>
                     <i class="author-view__logo iconfont icon-design"></i>
                 </div>
                 <!-- 作者信息展示区 -->
                 <div class="author-view__info">
-                    <link-avatar :src="authorInfo.headpic" :name="authorInfo.name" size="big" />
-                    <div class="author-view__name">{{ authorInfo.fullname }}</div>
-                    <div class="author-view__description">{{ authorInfo.description }}</div>
+                    <link-avatar
+                        :src="authorInfo.headpic"
+                        :name="authorInfo.name"
+                        size="big" />
+                    <div class="author-view__name">
+                        {{ authorInfo.fullname }}
+                    </div>
+                    <div class="author-view__description">
+                        {{ authorInfo.description }}
+                    </div>
                     <div class="author-view__operations">
                         <!-- <icon-link name="关注" iconfont="icon-plus" theme="gray" /> -->
-                        <follow-button :followed="authorInfo.followed" @follow="followAuthor" @unfollow="unfollowAuthor" />
+                        <follow-button
+                            :followed="authorInfo.followed"
+                            @follow="followAuthor"
+                            @unfollow="unfollowAuthor" />
                         <icon-link
                             name="联系作者"
                             iconfont="icon-email-fill"
@@ -33,12 +47,18 @@
             <main class="author-view__main">
                 <header class="author-view__main__header">
                     <!-- 分类筛选栏 -->
-                    <category-bar :options="categoryOptions" matchroute />
+                    <category-bar
+                        :options="categoryOptions"
+                        matchroute
+                        justify-content="start" />
                     <!-- 下拉列表按钮 -->
                     <btn-dropdown :options="viewOptions" matchroute />
                 </header>
                 <!-- 作者作品展示 -->
-                <board light :data="authorInfo.shots" route="author/shot-details-popup">
+                <board
+                    light
+                    :data="authorInfo.shots"
+                    route="author/shot-details-popup">
                     <template #loading-text>正在查找作品...</template>
                 </board>
             </main>
@@ -61,10 +81,20 @@ import LinkAvatar from "@/components/LinkAvatarComp.vue";
 import CategoryBar from "@/components/CategoryBarComp.vue";
 import BtnDropdown from "@/components/BtnDropdownComp.vue";
 import FollowButton from "@/components/FollowButtonComp.vue";
+import SyncImage from "@/components/SyncImageComp.vue";
 
 export default {
     name: "AuthorView",
-    components: { IconLink, Board, BoardEmpty, LinkAvatar, CategoryBar, BtnDropdown, FollowButton },
+    components: {
+        IconLink,
+        Board,
+        BoardEmpty,
+        LinkAvatar,
+        CategoryBar,
+        BtnDropdown,
+        FollowButton,
+        SyncImage,
+    },
     data() {
         return {
             categoryOptions: appAuthorCategoryOptions,
@@ -75,7 +105,11 @@ export default {
         // 数据获取函数
         fetchData: function (authorName) {
             if (!authorName || authorName == "") {
-                window.alertbox("无效路由", "error", () => (window.location.href = "/"));
+                window.alertbox(
+                    "无效路由",
+                    "error",
+                    () => (window.location.href = "/")
+                );
                 this.$store.commit("author/setLoadingState", false);
                 return false;
             }
@@ -84,7 +118,11 @@ export default {
         copyEmailAddress: function (emailAddress) {
             navigator.clipboard
                 .writeText(emailAddress)
-                .then(() => window.alertbox("作者邮箱 (" + emailAddress + ") 已复制到剪贴板"))
+                .then(() =>
+                    window.alertbox(
+                        "作者邮箱 (" + emailAddress + ") 已复制到剪贴板"
+                    )
+                )
                 .catch((error) => console.warn(error));
         },
         followAuthor: function () {
@@ -95,7 +133,10 @@ export default {
         },
     },
     computed: {
-        ...mapState("author", { authorInfo: "authorInfo", loading: "loadingState" }),
+        ...mapState("author", {
+            authorInfo: "authorInfo",
+            loading: "loadingState",
+        }),
     },
     watch: {
         // 侦听路由变化，更新导航栏按钮的params

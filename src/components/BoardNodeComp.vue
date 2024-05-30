@@ -7,11 +7,11 @@
             @mouseover="isHover = true"
             @mouseleave="isHover = false">
             <!-- 缩略图 -->
-            <img
-                :src="data.thumbnail"
+            <sync-image
+                ref="thumbnail"
                 :data-hover="isHover"
-                alt="thumbnail"
-                :loading="lazy" />
+                :src="`${data.thumbnail}?${data.id}`"
+                alt="thumbnail" />
             <!-- 标题栏 -->
             <transition name="title-box">
                 <p v-show="isHover" class="title-box">
@@ -55,10 +55,11 @@
 
 <script>
 import LinkAvatar from "./LinkAvatarComp.vue";
+import SyncImage from "./SyncImageComp.vue";
 
 export default {
     name: "BoardNodeComp",
-    components: { LinkAvatar },
+    components: { LinkAvatar, SyncImage },
     props: {
         index: Number,
         data: Object,
@@ -80,6 +81,19 @@ export default {
             });
         },
     },
+    // mounted() {
+    //     const src = this.data.thumbnail + "?" + this.data.id;
+    //     this.$refs.thumbnail.addEventListener("load", () => {
+    //         if (!this) return;
+    //         requestAnimationFrame(() => {
+    //             this.$refs.thumbnail.style.opacity = 1;
+    //         });
+    //     });
+    //     requestAnimationFrame(() => {
+    //         if (!this) return;
+    //         this.$refs.thumbnail.src = src;
+    //     });
+    // },
 };
 </script>
 
@@ -88,8 +102,7 @@ export default {
     user-select: none;
 
     & .thumbnail-link {
-        width: 100%;
-        height: 280px;
+        height: 270px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -97,16 +110,20 @@ export default {
         overflow: hidden;
         cursor: pointer;
         border-radius: 8px;
-        background-color: #eee;
+        background-color: #eeeeee22;
 
         & img {
-            width: 138%;
+            width: 100%;
+            aspect-ratio: 4 / 3;
             height: max-content;
             transition: all 0.16s ease-in;
+            opacity: 0;
+            object-fit: cover;
+            background-color: transparent;
 
             &:hover,
             &[data-hover] {
-                width: 120%;
+                transform: scale(1.1);
             }
         }
 

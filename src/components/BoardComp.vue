@@ -73,8 +73,6 @@ main {
     margin: 32px 0;
 }
 
-
-
 .board__empty {
     margin-top: 144px;
 }

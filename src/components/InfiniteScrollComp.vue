@@ -5,8 +5,10 @@
             <!-- 底部触发条 -->
             <div ref="triggerBarRef" class="infinite-scroll__trigger-bar"></div>
             <!-- 显示到底文字 -->
-            <div v-if="nomore" class="infinite-scroll__nomore">
-                已经到底啦 （数据加载完毕）
+            <div
+                v-if="nomore"
+                :class="{ 'infinite-scroll__nomore': !$slots.nomore }">
+                <slot name="nomore">已经到底啦 （数据加载完毕）</slot>
             </div>
         </div>
     </div>
@@ -68,7 +70,7 @@ export default {
     --font-family: var(--mainly-font-family);
 
     --height: 100%;
-    --trigger-bar-height: 16px;
+    --trigger-bar-height: 128px;
 }
 
 /* Original Styles */

@@ -13,7 +13,9 @@
             rmfo />
         <template v-if="hasLogin">
             <!-- 上传作品按钮 -->
-            <icon-link theme="gray" class="mg-l16">上传作品</icon-link>
+            <router-link :to="{ name: 'upload' }">
+                <icon-link theme="gray" class="mg-l16">上传作品</icon-link>
+            </router-link>
             <!-- 用户头像 -->
             <link-avatar
                 class="app-header__user"
@@ -43,6 +45,9 @@ import { isTokenExpired } from "@/utils";
 export default {
     name: "AppHeaderComp",
     components: { AppLogo, FormInput, IconLink, LinkAvatar },
+    props: {
+        backgroundColor: String,
+    },
     data() {
         return {
             searchText: null,

@@ -35,6 +35,7 @@ export default {
     user-select: none;
 
     & img {
+        width: 64px;
         transition: all 0.16s ease;
         width: 120%;
 

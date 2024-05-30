@@ -1,7 +1,9 @@
 <template>
     <div class="shot-details-wrap">
         <!-- 显示详情页关闭按钮 -->
-        <i class="shot-details__clsbtn iconfont icon-wrong" @click="$router.back()"></i>
+        <i
+            class="shot-details__clsbtn iconfont icon-wrong"
+            @click="handleClose"></i>
         <!-- 详情页主体 -->
         <transition name="shot-details" appear>
             <shot-details-view></shot-details-view>
@@ -15,6 +17,12 @@ import ShotDetailsView from "./ShotDetailsView.vue";
 export default {
     name: "ShotDetailsPopupView",
     components: { ShotDetailsView },
+    methods: {
+        handleClose() {
+            // this.$router.push({ name: "shots" });
+            this.$router.go(-1);
+        },
+    },
     created() {
         document.querySelector("body").style.overflow = "hidden";
     },

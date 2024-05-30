@@ -15,7 +15,10 @@
             @click="scroll('right', valueOffset)">
             &gt;
         </span>
-        <main ref="categoryBar" :data-is-overflow="isOverflow">
+        <main
+            ref="categoryBar"
+            :data-is-overflow="isOverflow"
+            :style="{ 'justify-content': justifyContent }">
             <a
                 v-for="(item, idx) in options"
                 ref="categoryBarLinks"
@@ -36,6 +39,7 @@ export default {
         value: String,
         matchroute: Boolean,
         theme: { type: String, default: "gray" },
+        justifyContent: { type: String, default: "center" },
     },
     data() {
         return {

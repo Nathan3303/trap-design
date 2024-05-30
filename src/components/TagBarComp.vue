@@ -1,16 +1,24 @@
 <template>
     <div class="tag-bar">
         <p>{{ title }}</p>
-        <icon-link v-for="(item, idx) in data" :key="idx" theme="tag" :href="`/search/${item}`">{{ item }}</icon-link>
+        <!-- <icon-link v-for="(item, idx) in data" :key="idx" theme="tag"> -->
+        <router-link
+            v-for="(item, idx) in data"
+            :key="idx"
+            :to="{ name: 'search', params: { text: item } }"
+            class="icon-link-theme--tag">
+            {{ item }}
+        </router-link>
+        <!-- </icon-link> -->
     </div>
 </template>
 
 <script>
-import IconLink from "./IconLinkComp.vue";
+// import IconLink from "./IconLinkComp.vue";
 
 export default {
     name: "TagBar",
-    components: { IconLink },
+    // components: { IconLink },
     props: {
         data: Array,
         title: String,

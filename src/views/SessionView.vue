@@ -16,22 +16,22 @@ import AppLogo from "@/components/AppLogoComp.vue";
 export default {
     name: "SessionView",
     components: { AppLogo },
-    computed: {
-        asideImageUrl() {
-            const urlSet = [
-                "/images/works/d.webp",
-                "/images/works/h.webp",
-                "/images/works/t.webp",
-                "/images/works/a.webp",
-                "/images/works/c.webp",
-                "/images/works/j.webp",
-                "/images/works/f.webp",
-                "/images/works/f3.webp",
-            ];
-            const randomIndex = Math.floor(Math.random() * urlSet.length);
-            return `url(${urlSet[randomIndex]})`;
-        },
-    },
+    // computed: {
+    //     asideImageUrl() {
+    //         const urlSet = [
+    //             "/images/works/d.webp",
+    //             "/images/works/h.webp",
+    //             "/images/works/t.webp",
+    //             "/images/works/a.webp",
+    //             "/images/works/c.webp",
+    //             "/images/works/j.webp",
+    //             "/images/works/f.webp",
+    //             "/images/works/f3.webp",
+    //         ];
+    //         const randomIndex = Math.floor(Math.random() * urlSet.length);
+    //         return `url(${urlSet[randomIndex]})`;
+    //     },
+    // },
 };
 </script>
 
@@ -48,7 +48,7 @@ export default {
         padding: 32px;
         flex-direction: column;
         justify-content: space-between;
-        background-image: v-bind(asideImageUrl);
+        background-image: url("https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c3RhdHVzJTIwbGF0dGVyJTIwbGF0JTIwcGVvcGxlJTIwc3RhdHVzJTIwZmlsZXM%3D&ixlib=rb-1.2.1&w=1000&q=80");
         background-repeat: no-repeat;
         background-size: auto 100%;
         background-position: center;
@@ -82,9 +82,11 @@ export default {
                 flex-direction: column;
                 gap: 2rem;
 
-                & h1 {
-                    font-weight: 26px;
-                    font-weight: 400;
+                h1 {
+                    font-size: 24px;
+                    font-weight: 600;
+                    border-bottom: 1px solid #cfcfcf;
+                    padding-bottom: 2rem;
                 }
 
                 .form-input-bar {
@@ -93,7 +95,15 @@ export default {
                     gap: 8px;
 
                     & label {
-                        font-weight: 400;
+                        font-weight: 500;
+                    }
+
+                    .form-input-wrap {
+                        height: 48px;
+                        
+                        & main {
+                            padding: 0 12px 0 18px;
+                        }
                     }
                 }
 

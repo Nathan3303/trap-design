@@ -1,4 +1,4 @@
-import { parseQueryObject, warner, filterPagedShots } from "@/utils";
+import { parseQueryObject, warner } from "@/utils";
 
 const appMainStoreModule = {
     namespaced: true,
@@ -16,7 +16,7 @@ const appMainStoreModule = {
             _expand: "author",
             _embed: "likes",
         },
-        loadingState: false,
+        loadingState: true,
         page: 1,
         isNoMore: false,
     }),
@@ -73,18 +73,11 @@ const appMainStoreModule = {
         addPagedShotsToShots: (state, value) => {
             if (!Array.isArray(value)) return;
             if (value.length) {
-                if (value.length < 10) {
-                    state.isNoMore = true;
-                }
+                state.isNoMore = value.length < 10;
                 const { shots } = state;
-                const filterResult = filterPagedShots(
-                    value,
-                    state.filterInfo.view
-                );
-                const newShots = [...shots, ...filterResult];
+                const newShots = [...shots, ...value];
                 state.shots = newShots;
                 state.page++;
-                // console.log(state.shots);
                 return;
             }
             state.isNoMore = true;
@@ -110,14 +103,19 @@ const appMainStoreModule = {
                 commit("setShots", []);
                 commit("resetPage");
                 commit("resetNomore");
+                commit("setLoadingState", true);
             }
             let queryString = parseQueryObject(state.filterInfo);
-            queryString += `&_page=${state.page}&_limit=12&_sort=id&_order=desc`;
-            console.log(queryString);
+            const limit = state.page > 1 ? 10 : 10;
+            queryString += `&_page=${state.page}&_limit=${limit}&_sort=id&_order=desc`;
+            // console.log(queryString);
             try {
                 const response = await this._vm.axios("shots" + queryString);
                 if (response.status === 200 && response.data) {
                     commit("addPagedShotsToShots", response.data);
+                    if (payload.reload) {
+                        commit("setLoadingState", false);
+                    }
                     return;
                 }
             } catch (error) {
