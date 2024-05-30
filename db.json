@@ -341,7 +341,143 @@
       "tags": [],
       "likes": 56,
       "views": 310000,
+      "thumbnail": "https://picsum.photos/800/600",
+      "images": [
+        "https://picsum.photos/800/600?1",
+        "https://picsum.photos/800/600?2"
+      ],
+      "content": []
+    },
+    {
+      "id": 27,
+      "authorId": 3,
+      "author": "nikolai",
+      "title": "Verification Success 3D Icon",
+      "category": "chinese",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
       "thumbnail": "/images/works/z.webp",
+      "content": []
+    },
+    {
+      "id": 28,
+      "authorId": 3,
+      "author": "nikolai",
+      "title": "Verification Success 3D Icon",
+      "category": "chinese",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "https://picsum.photos/800/600",
+      "content": []
+    },
+    {
+      "id": 29,
+      "authorId": 3,
+      "author": "nikolai",
+      "title": "Verification Success 3D Icon",
+      "category": "chinese",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "https://picsum.photos/800/600",
+      "content": []
+    },
+    {
+      "id": 30,
+      "authorId": 2,
+      "author": "aleksander",
+      "title": "Verification Success 3D Icon",
+      "category": "woodcut",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "https://picsum.photos/800/600",
+      "content": []
+    },
+    {
+      "id": 31,
+      "authorId": 2,
+      "author": "aleksander",
+      "title": "Verification Success 3D Icon",
+      "category": "sketch",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "https://picsum.photos/800/600",
+      "content": []
+    },
+    {
+      "id": 32,
+      "authorId": 2,
+      "author": "aleksander",
+      "title": "Verification Success 3D Icon",
+      "category": "sketch",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "https://picsum.photos/800/600",
+      "content": []
+    },
+    {
+      "id": 33,
+      "authorId": 2,
+      "author": "aleksander",
+      "title": "Verification Success 3D Icon",
+      "category": "sketch",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "https://picsum.photos/800/600",
+      "content": []
+    },
+    {
+      "id": 34,
+      "authorId": 2,
+      "author": "aleksander",
+      "title": "Verification Success 3D Icon",
+      "category": "sketch",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "https://picsum.photos/800/600",
+      "content": []
+    },
+    {
+      "id": 35,
+      "authorId": 2,
+      "author": "aleksander",
+      "title": "Verification Success 3D Icon",
+      "category": "sketch",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "https://picsum.photos/800/600",
+      "content": []
+    },
+    {
+      "id": 36,
+      "authorId": 2,
+      "author": "aleksander",
+      "title": "Verification Success 3D Icon",
+      "category": "sketch",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "https://picsum.photos/800/600",
+      "content": []
+    },
+    {
+      "id": 37,
+      "authorId": 2,
+      "author": "aleksander",
+      "title": "Verification Success 3D Icon",
+      "category": "sketch",
+      "tags": [],
+      "likes": 56,
+      "views": 310000,
+      "thumbnail": "https://picsum.photos/800/600",
       "content": []
     }
   ],
@@ -404,6 +540,16 @@
       "userId": 1,
       "shotId": 3,
       "id": 8
+    },
+    {
+      "userId": 1,
+      "shotId": 14,
+      "id": 9
+    },
+    {
+      "userId": 1,
+      "shotId": 24,
+      "id": 10
     }
   ],
   "followers": []
